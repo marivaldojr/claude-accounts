@@ -186,18 +186,30 @@ body {
   padding: 0;
 }
 
+/* The second column holds the text and the bar under it. Both lists share one
+   label width — wide enough for a model name like "Fable" — so every bar, the
+   5h and 7d ones included, starts at the same x and they compare at a glance. */
 .windows li {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  column-gap: 8px;
+  row-gap: 3px;
   align-items: baseline;
-  gap: 8px;
   font-size: 11px;
-  padding: 2px 0;
+  padding: 3px 0;
+}
+
+.windows li .track {
+  grid-column: 2;
+  height: 4px;
 }
 
 .windows .w {
-  min-width: 22px;
   color: var(--faint);
   font-variant-numeric: tabular-nums;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .windows .v {
@@ -340,11 +352,6 @@ footer {
   border-color: color-mix(in srgb, var(--out) 35%, transparent);
   border-left-color: var(--out);
   background: color-mix(in srgb, var(--out) 10%, transparent);
-}
-
-/* Scoped windows carry a model name, wider than "5h". */
-.windows.sub .w {
-  min-width: 48px;
 }
 
 .note.stale {
