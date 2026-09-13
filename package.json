@@ -162,5 +162,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/marivaldojr/claude-accounts"
+  },
+  "homepage": "https://github.com/marivaldojr/claude-accounts#readme",
+  "bugs": {
+    "url": "https://github.com/marivaldojr/claude-accounts/issues"
   }
 }
