@@ -90,9 +90,19 @@
     return windows.length === 0 ? null : Math.min(...windows.map(freeOf));
   }
 
+  function track(level, usedPercent) {
+    const node = el('div', `track ${level}`);
+    const fill = el('span');
+    fill.style.width = `${Math.min(100, Math.max(0, usedPercent))}%`;
+    node.append(fill);
+    return node;
+  }
+
   function windowRow(window) {
     const row = el('li');
-    row.append(el('span', 'w', window.label));
+    const label = el('span', 'w', window.label);
+    label.title = window.label;
+    row.append(label);
     const free = freeOf(window);
     const reset = until(window.resetsAt);
     let text;
@@ -104,6 +114,7 @@
       text = reset ? `${window.usedPercent}% used · resets ${reset}` : `${window.usedPercent}% used`;
     }
     row.append(el('span', free <= 0 ? 'v exhausted' : 'v', text));
+    row.append(track(severity(free), window.usedPercent));
     return row;
   }
 
@@ -151,12 +162,8 @@
       node.append(line);
     }
 
-    const track = el('div', `track ${level}`);
-    const fill = el('span');
-    fill.style.width = `${free === null ? 0 : 100 - free}%`;
-    track.append(fill);
-    node.append(track);
-
+    // Each window carries its own bar below, so the card no longer has a single
+    // bar for the tightest one — it would repeat whichever window that is.
     const usage = profile.lastUsage;
     const main = accountWindows(usage);
     if (main.length > 0) {
