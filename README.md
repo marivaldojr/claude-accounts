@@ -7,6 +7,10 @@ each one has left.
 
 The sister of [Codex Accounts](https://github.com/marivaldojr/codex-accounts).
 
+<img src="https://raw.githubusercontent.com/marivaldojr/claude-accounts/main/docs/screenshot.png"
+     width="380"
+     alt="The Claude Accounts panel: three accounts, each leading with the consumption of its tightest window over a bar for the 5-hour session, the week and the Fable model, with the account in use marked.">
+
 ## What it does
 
 - **Activity bar panel.** Each account leads with the consumption of its
