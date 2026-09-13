@@ -1,0 +1,352 @@
+:root {
+  --rail: 3px;
+  --muted: color-mix(in srgb, var(--vscode-foreground) 55%, transparent);
+  --faint: color-mix(in srgb, var(--vscode-foreground) 30%, transparent);
+  --rule: color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+  --edge: color-mix(in srgb, var(--vscode-foreground) 20%, transparent);
+  --edge-hover: color-mix(in srgb, var(--vscode-foreground) 35%, transparent);
+  --surface: color-mix(in srgb, var(--vscode-foreground) 4%, transparent);
+  /* Claude's own orange, not the theme's green: the healthy state doubles as
+     the brand mark, so it stays fixed across themes. */
+  --ok: #d97757;
+  --low: var(--vscode-charts-yellow, #d29922);
+  --out: var(--vscode-charts-red, #f85149);
+}
+
+body {
+  margin: 0;
+  padding: 12px 12px 20px;
+  font-family: var(--vscode-font-family);
+  font-size: var(--vscode-font-size);
+  color: var(--vscode-foreground);
+  background: transparent;
+}
+
+/* ---------- toolbar ---------- */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-bottom: 12px;
+}
+
+/* Every control carries an edge of its own, so a button looks like a button
+   before it is hovered. Ghost buttons were quieter, but on a sidebar the whole
+   panel is read in one glance and floating text does not read as clickable. */
+.toolbar button {
+  font: inherit;
+  font-size: 11px;
+  padding: 4px 9px;
+  border: 1px solid var(--edge);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.toolbar button:hover {
+  border-color: var(--edge-hover);
+  background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
+  color: var(--vscode-foreground);
+}
+
+.toolbar .save {
+  flex: 1;
+  text-align: left;
+  color: var(--vscode-foreground);
+  background: var(--surface);
+}
+
+.toolbar button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+/* ---------- hint ---------- */
+
+.hint {
+  margin-bottom: 12px;
+  padding: 8px 10px;
+  border: 1px solid color-mix(in srgb, var(--low) 30%, transparent);
+  border-left: var(--rail) solid var(--low);
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--low) 10%, transparent);
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* ---------- account ---------- */
+
+/* A closed border around each account separates two cards better than a rule
+   between them did: the block reads as one object instead of as the text that
+   happens to sit under a line. */
+.account {
+  padding: 10px 12px 11px;
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  background: var(--surface);
+}
+
+.account + .account {
+  margin-top: 8px;
+}
+
+/* The active card is stated by its own edge, so the left rail that used to
+   carry it is gone — one indicator, not two. */
+.account.active {
+  border-color: color-mix(in srgb, var(--ok) 45%, transparent);
+  background: color-mix(in srgb, var(--ok) 6%, transparent);
+}
+
+.account-head {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.account-head .spacer {
+  flex: 1;
+}
+
+/* Email and plan share a line: two quiet facts do not deserve two rows. */
+.meta-line {
+  font-size: 11px;
+  color: var(--faint);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 1px 0 6px;
+}
+
+.name {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* A pill, not loose text: it labels the card the way the card's own edge does,
+   and it stops reading as part of the account name next to it. */
+.active-tag {
+  font-size: 9px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ok);
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ok) 16%, transparent);
+}
+
+
+/* ---------- figure ---------- */
+
+
+.figure {
+  font-size: 19px;
+  font-weight: 300;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.figure.ok { color: var(--ok); }
+.figure.low { color: var(--low); }
+.figure.out { color: var(--out); }
+.figure.unknown { color: var(--faint); }
+
+.figure-label {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+
+.track {
+  height: 5px;
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--vscode-foreground) 12%, transparent);
+  overflow: hidden;
+}
+
+.track > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--ok);
+}
+
+.track.low > span { background: var(--low); }
+.track.out > span { background: var(--out); }
+
+/* ---------- windows ---------- */
+
+.windows {
+  list-style: none;
+  margin: 7px 0 0;
+  padding: 0;
+}
+
+.windows li {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-size: 11px;
+  padding: 2px 0;
+}
+
+.windows .w {
+  min-width: 22px;
+  color: var(--faint);
+  font-variant-numeric: tabular-nums;
+}
+
+.windows .v {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.windows .v.exhausted {
+  color: var(--out);
+}
+
+.family {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  color: var(--faint);
+  padding: 6px 0 0;
+}
+
+.family::before {
+  content: '\21B3';
+}
+
+.note {
+  font-size: 10px;
+  color: var(--faint);
+  padding-top: 7px;
+}
+
+.note.error {
+  color: var(--out);
+}
+
+/* ---------- actions ---------- */
+
+/* Bordered buttons sit on their own box, so the row no longer needs to be
+   pulled left to line its text up with the card's edge. */
+.actions {
+  display: flex;
+  gap: 4px;
+  padding-top: 9px;
+}
+
+.actions button {
+  font: inherit;
+  font-size: 11px;
+  padding: 3px 7px;
+  border: 1px solid var(--edge);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.actions button:hover {
+  border-color: var(--edge-hover);
+  background: color-mix(in srgb, var(--vscode-foreground) 10%, transparent);
+  color: var(--vscode-foreground);
+}
+
+/* Switching accounts is the whole point of the panel, so it gets the only
+   filled button on the card; everything else stays quiet around it. */
+.actions button.use {
+  padding: 3px 13px;
+  font-weight: 600;
+  border-color: transparent;
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+}
+
+.actions button.use:hover {
+  border-color: transparent;
+  background: var(--vscode-button-hoverBackground);
+  color: var(--vscode-button-foreground);
+}
+
+.actions .grow {
+  flex: 1;
+}
+
+.actions button.danger:hover {
+  border-color: color-mix(in srgb, var(--out) 45%, transparent);
+  background: color-mix(in srgb, var(--out) 18%, transparent);
+  color: var(--out);
+}
+
+/* ---------- empty / footer ---------- */
+
+.empty {
+  padding: 10px 0 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+footer {
+  padding-top: 18px;
+  font-size: 10px;
+  color: var(--faint);
+  word-break: break-all;
+}
+
+/* ---------- busy ---------- */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.busy > span {
+  display: inline-block;
+  animation: spin 900ms linear infinite;
+}
+
+/* Both selectors carry the container class on purpose: `.busy:disabled` alone
+   loses to `.toolbar button:disabled`, and the spinner would fade to 40% —
+   which reads as broken rather than working. */
+.toolbar button.busy:disabled,
+.actions button.busy:disabled {
+  opacity: 1;
+  color: var(--vscode-foreground);
+}
+
+/* A spinner is decoration; without it the state still has to be legible, so
+   the button holds a steady dim instead. The card's "checking…" note carries
+   the meaning either way. */
+@media (prefers-reduced-motion: reduce) {
+  .busy > span {
+    animation: none;
+  }
+
+  .busy {
+    opacity: 0.6;
+  }
+}
+
+/* ---------- claude-specific ---------- */
+
+.hint.warn {
+  border-color: color-mix(in srgb, var(--out) 35%, transparent);
+  border-left-color: var(--out);
+  background: color-mix(in srgb, var(--out) 10%, transparent);
+}
+
+/* Scoped windows carry a model name, wider than "5h". */
+.windows.sub .w {
+  min-width: 48px;
+}
+
+.note.stale {
+  color: var(--low);
+}

@@ -1,0 +1,165 @@
+{
+  "name": "claude-accounts",
+  "displayName": "Claude Accounts",
+  "description": "Switch between multiple Claude accounts in VS Code, with live plan usage (5h session, weekly, per model) for every account.",
+  "version": "0.1.0",
+  "publisher": "marivaldojr",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "claude",
+    "claude code",
+    "anthropic",
+    "account",
+    "switcher",
+    "usage",
+    "rate limit"
+  ],
+  "galleryBanner": {
+    "color": "#1f1f1f",
+    "theme": "dark"
+  },
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "claudeAccounts",
+          "title": "Claude Accounts",
+          "icon": "media/icon-bars.svg"
+        }
+      ]
+    },
+    "views": {
+      "claudeAccounts": [
+        {
+          "id": "claudeAccounts.accountsView",
+          "name": "Accounts",
+          "type": "webview"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "claudeAccounts.saveCurrent",
+        "title": "Claude Accounts: Save current account as profile",
+        "icon": "$(add)"
+      },
+      {
+        "command": "claudeAccounts.switch",
+        "title": "Claude Accounts: Switch account",
+        "icon": "$(arrow-swap)"
+      },
+      {
+        "command": "claudeAccounts.refresh",
+        "title": "Claude Accounts: Refresh usage",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "claudeAccounts.login",
+        "title": "Claude Accounts: Add an account (log in)",
+        "icon": "$(sign-in)"
+      },
+      {
+        "command": "claudeAccounts.rename",
+        "title": "Claude Accounts: Rename profile"
+      },
+      {
+        "command": "claudeAccounts.remove",
+        "title": "Claude Accounts: Remove profile"
+      },
+      {
+        "command": "claudeAccounts.openPanel",
+        "title": "Claude Accounts: Show accounts panel"
+      },
+      {
+        "command": "claudeAccounts.showLog",
+        "title": "Claude Accounts: Show log"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "claudeAccounts.saveCurrent",
+          "when": "view == claudeAccounts.accountsView",
+          "group": "navigation@1"
+        },
+        {
+          "command": "claudeAccounts.refresh",
+          "when": "view == claudeAccounts.accountsView",
+          "group": "navigation@2"
+        },
+        {
+          "command": "claudeAccounts.login",
+          "when": "view == claudeAccounts.accountsView",
+          "group": "navigation@3"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Claude Accounts",
+      "properties": {
+        "claudeAccounts.pollIntervalSeconds": {
+          "type": "number",
+          "default": 300,
+          "minimum": 180,
+          "markdownDescription": "How often (in seconds) to refresh usage automatically. Each refresh is one request per profile to an endpoint Anthropic rate-limits heavily; values below 180s are raised to 180s."
+        },
+        "claudeAccounts.autoReloadAfterSwitch": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "Reload the VS Code window after switching accounts. Not needed for Claude Code to pick up the new account — new conversations use it right away — but it is the only way to move conversations that are already open."
+        },
+        "claudeAccounts.configDir": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Claude config directory. Empty = `CLAUDE_CONFIG_DIR` from `claudeCode.environmentVariables`, then the `CLAUDE_CONFIG_DIR` environment variable, then `~/.claude`."
+        },
+        "claudeAccounts.claudeCommand": {
+          "type": "string",
+          "default": "",
+          "markdownDescription": "Claude CLI used for logging in. Empty = the binary bundled with the official Claude Code extension, then `claude` on PATH."
+        },
+        "claudeAccounts.warnThresholdPercent": {
+          "type": "number",
+          "default": 80,
+          "minimum": 1,
+          "maximum": 100,
+          "markdownDescription": "Usage threshold (%) above which the bar turns red."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "package": "node esbuild.js --production",
+    "typecheck": "tsc --noEmit",
+    "test:smoke": "tsc -p . && node test/smoke.mjs",
+    "vscode:prepublish": "npm run package",
+    "build:vsix": "npm run package && vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "proper-lockfile": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/proper-lockfile": "^4.1.4",
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.2.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marivaldojr/claude-accounts"
+  }
+}

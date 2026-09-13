@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="Claude Accounts">
+  <defs>
+    <linearGradient id="cla-bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2B221D"/>
+      <stop offset="1" stop-color="#15110F"/>
+    </linearGradient>
+    <linearGradient id="cla-bar" gradientUnits="userSpaceOnUse" x1="45" y1="0" x2="108" y2="0">
+      <stop offset="0" stop-color="#F6C29E"/>
+      <stop offset="1" stop-color="#D97757"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="128" height="128" rx="28" fill="url(#cla-bg)"/>
+
+  <!-- tracks: the full window of each account -->
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.10" stroke-width="13" stroke-linecap="round">
+    <line x1="52" y1="38" x2="101" y2="38"/>
+    <line x1="52" y1="64" x2="101" y2="64"/>
+    <line x1="52" y1="90" x2="101" y2="90"/>
+  </g>
+
+  <!-- bars: how much each account has burned; the one in use on top, then least-used first -->
+  <g fill="none" stroke="url(#cla-bar)" stroke-width="13" stroke-linecap="round">
+    <line x1="52" y1="38" x2="86" y2="38"/>
+    <line x1="52" y1="64" x2="64" y2="64"/>
+    <line x1="52" y1="90" x2="76" y2="90"/>
+  </g>
+
+  <!-- accounts: the one in use is lit -->
+  <circle cx="29" cy="38" r="9" fill="#FBEFE6"/>
+  <g fill="#FFFFFF" fill-opacity="0.22">
+    <circle cx="29" cy="64" r="9"/>
+    <circle cx="29" cy="90" r="9"/>
+  </g>
+</svg>

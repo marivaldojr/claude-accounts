@@ -1,0 +1,7 @@
+node_modules/
+dist/
+out/
+*.vsix
+
+# NTFS leftover from copying Windows files into WSL
+*:Zone.Identifier
