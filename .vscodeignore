@@ -8,3 +8,5 @@ tsconfig.json
 test/**
 docs/**
 node_modules/**
+media/logo.svg
+media/logo-mark.svg

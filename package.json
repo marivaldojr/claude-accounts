@@ -20,6 +20,7 @@
     "usage",
     "rate limit"
   ],
+  "icon": "media/icon.png",
   "galleryBanner": {
     "color": "#1f1f1f",
     "theme": "dark"
