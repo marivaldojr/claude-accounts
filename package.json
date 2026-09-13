@@ -2,7 +2,7 @@
   "name": "claude-accounts",
   "displayName": "Claude Accounts",
   "description": "Switch between multiple Claude accounts in VS Code, with live plan usage (5h session, weekly, per model) for every account.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publisher": "marivaldojr",
   "license": "MIT",
   "engines": {

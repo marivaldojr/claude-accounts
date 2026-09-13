@@ -4,6 +4,13 @@ Notable changes to Claude Accounts. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.1] — 2026-09-13
+
+### Changed
+
+- The Marketplace page shows a screenshot of the panel. The extension itself
+  is the same as 0.1.0.
+
 ## [0.1.0] — 2026-09-12
 
 ### Added
