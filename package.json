@@ -146,7 +146,8 @@
     "typecheck": "tsc --noEmit",
     "test:smoke": "tsc -p . && node test/smoke.mjs",
     "vscode:prepublish": "npm run package",
-    "build:vsix": "npm run package && vsce package --no-dependencies"
+    "build:vsix": "npm run package && vsce package --no-dependencies",
+    "publish:ovsx": "ovsx publish claude-accounts-$npm_package_version.vsix"
   },
   "dependencies": {
     "proper-lockfile": "^4.1.2"
@@ -157,6 +158,7 @@
     "@types/vscode": "^1.85.0",
     "@vscode/vsce": "^3.2.0",
     "esbuild": "^0.24.0",
+    "ovsx": "^1.2.0",
     "typescript": "^5.4.0"
   },
   "repository": {
